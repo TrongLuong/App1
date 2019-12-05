@@ -71,10 +71,16 @@
             android:text="Update" />
     </LinearLayout>
 
-    <GridView
-        android:numColumns="3"
+<!--    <GridView-->
+<!--        android:numColumns="3"-->
+<!--        android:id="@+id/girdView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent" />-->
+    <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+    </ListView>
 
 </LinearLayout>

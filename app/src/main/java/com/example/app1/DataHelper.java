@@ -10,9 +10,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DataHelper extends SQLiteOpenHelper {
     static final String DB_NAME = "nhanvienDB";
 
-
-
-
     public DataHelper( Context context) {
             super(context, DB_NAME, null, 1);
     }

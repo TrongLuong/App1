@@ -18,36 +18,34 @@ public class NVProvider extends ContentProvider {
     static final String TB_NAME = "nhanvien";
     static final String AUTHORITY = "content://com.example.app1.NVProvider/nhanvien";
     static final Uri CONTENT_URI = Uri.parse(AUTHORITY);
-
     private SQLiteDatabase db;
+
     @Override
     public boolean onCreate() {
         Context context = getContext();
         DataHelper helper = new DataHelper(context);
-
         db = helper.getWritableDatabase();
-        if (db!=null) return true;
+        if (db != null) return true;
         return false;
     }
 
-
     @Override
-    public Cursor query( Uri uri,  String[] strings,  String s,  String[] strings1,  String s1) {
+    public Cursor query(Uri uri, String[] strings, String s, String[] strings1, String s1) {
         Cursor cur = db.rawQuery(s, null);
         return cur;
     }
 
 
     @Override
-    public String getType( Uri uri) {
+    public String getType(Uri uri) {
         String ret = getContext().getContentResolver().getType(Settings.System.CONTENT_URI);
-        Log.d(TAG,"getType returning: "+ret);
+        Log.d(TAG, "getType returning: " + ret);
         return ret;
     }
 
 
     @Override
-    public Uri insert( Uri uri,  ContentValues contentValues) {
+    public Uri insert(Uri uri, ContentValues contentValues) {
         long rowID = db.insert(TB_NAME, null, contentValues);
         if (rowID > 0) {
             Uri _uri = ContentUris.withAppendedId(CONTENT_URI, rowID);
@@ -59,7 +57,7 @@ public class NVProvider extends ContentProvider {
     }
 
     @Override
-    public int delete( Uri uri,  String s,  String[] strings) {
+    public int delete(Uri uri, String s, String[] strings) {
         int count = 0;
         count = db.delete(TB_NAME, "id = '" + s + "'", strings);
         getContext().getContentResolver().notifyChange(uri, null);
@@ -67,7 +65,7 @@ public class NVProvider extends ContentProvider {
     }
 
     @Override
-    public int update( Uri uri,  ContentValues contentValues,  String s,  String[] strings) {
+    public int update(Uri uri, ContentValues contentValues, String s, String[] strings) {
         int count = 0;
         count = db.update(TB_NAME, contentValues, "id = '" + s + "'", null);
         getContext().getContentResolver().notifyChange(uri, null);
